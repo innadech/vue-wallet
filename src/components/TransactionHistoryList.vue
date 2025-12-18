@@ -22,7 +22,7 @@ export default {
   <div class="container px-4 text-left">
     <p class="fs-1 text-left">Transaction History</p>
     <ul class="list-group">
-      <IncomeCategoryItem
+      <TransactionHistoryItem
         v-for="transaction of transactionHistory"
         v-bind:key="transaction.id"
         v-bind:transaction="transaction"
