@@ -19,12 +19,15 @@ export default {
 </script>
 
 <template>
-  <ul>
-    <IncomeCategoryItem
-      v-for="category of incomeCategories"
-      v-bind:key="category.id"
-      v-bind:category="category"
-      v-on:incomecategory-deleted="deleteIncomeCategory($event)"
-    />
-  </ul>
+  <div class="p-3">
+    <p>Income categories</p>
+    <ul>
+      <IncomeCategoryItem
+        v-for="category of incomeCategories"
+        v-bind:key="category.id"
+        v-bind:category="category"
+        v-on:incomecategory-deleted="deleteIncomeCategory($event)"
+      />
+    </ul>
+  </div>
 </template>

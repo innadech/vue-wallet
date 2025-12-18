@@ -1,17 +1,21 @@
 <script>
 import IncomeSubmitter from './components/IncomeSubmitter.vue'
 import OutcomeSubmitter from './components/OutcomeSubmitter.vue'
-import IncomeCategotyList from './components/IncomeCategotyList.vue'
+import IncomeCategoryList from './components/IncomeCategoryList.vue'
 import IncomeCategorySubmitter from './components/IncomeCategorySubmitter.vue'
 import TransactionHistoryList from './components/TransactionHistoryList.vue'
+import OutcomeCategoryList from './components/OutcomeCategoryList.vue'
+import OutcomeCategorySubmitter from './components/OutcomeCategorySubmitter.vue'
 
 export default {
   components: {
     IncomeSubmitter,
     OutcomeSubmitter,
-    IncomeCategotyList,
+    IncomeCategoryList,
     IncomeCategorySubmitter,
     TransactionHistoryList,
+    OutcomeCategoryList,
+    OutcomeCategorySubmitter,
   },
 
   data() {
@@ -44,6 +48,9 @@ export default {
 
     submitIncomeCategory(incomegategory) {
       this.incomeCategories.push(incomegategory)
+    },
+    submitOutcomeCategory(outcomegategory) {
+      this.outcomeCategories.push(outcomegategory)
     },
   },
   computed: {
@@ -93,37 +100,22 @@ export default {
           <div class="container overflow-hidden text-center">
             <div class="row gx-5">
               <div class="col">
-                <div class="p-3">
-                  <p>Income categories</p>
-                  <div id="container-income-list">
-                    <IncomeCategotyList
-                      v-bind:incomeCategories="incomeCategories"
-                      v-on:incomeCategories-deleted="incomeCategories = $event"
-                    />
-                    <!-- <span class="badge rounded-pill text-bg-light">Light
-                    <button type="button" class="btn-close" aria-label="Close"></button> -->
-                  </div>
-                </div>
-                <div class="input-group mb-3">
-                  <IncomeCategorySubmitter
-                    v-on:incomecategory-submitted="submitIncomeCategory($event)"
-                  />
-                </div>
+                <IncomeCategoryList
+                  v-bind:incomeCategories="incomeCategories"
+                  v-on:incomeCategories-deleted="incomeCategories = $event"
+                />
+                <IncomeCategorySubmitter
+                  v-on:incomecategory-submitted="submitIncomeCategory($event)"
+                />
               </div>
               <div class="col">
-                <div class="p-3">
-                  <p>Outcome categories</p>
-                  <div id="container-outcome-list">
-                    <!-- <span class="badge rounded-pill text-bg-light">Light
-                    <button type="button" class="btn-close" aria-label="Close"></button>
-                    </span> -->
-                  </div>
-                </div>
-                <div class="input-group mb-3">
-                  <IncomeCategorySubmitter
-                    v-on:incomecategory-submitted="submitIncomeCategory($event)"
-                  />
-                </div>
+                <OutcomeCategoryList
+                  v-bind:outcomeCategories="outcomeCategories"
+                  v-on:outcomeCategories-deleted="outcomeCategories = $event"
+                />
+                <OutcomeCategorySubmitter
+                  v-on:outcomecategory-submitted="submitOutcomeCategory($event)"
+                />
               </div>
             </div>
           </div>

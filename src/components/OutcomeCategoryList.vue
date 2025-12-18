@@ -20,12 +20,15 @@ export default {
 </script>
 
 <template>
-  <ul>
-    <OutcomeCategoryItem
-      v-for="category of outcomeCategories"
-      v-bind:key="category.id"
-      v-bind:category="category"
-      v-on:outcomecategory-deleted="deleteOutcomeCategory($event)"
-    />
-  </ul>
+  <div class="p-3">
+    <p>Outcome categories</p>
+    <ul>
+      <OutcomeCategoryItem
+        v-for="category of outcomeCategories"
+        v-bind:key="category.id"
+        v-bind:category="category"
+        v-on:outcomecategory-deleted="deleteOutcomeCategory($event)"
+      />
+    </ul>
+  </div>
 </template>
