@@ -6,6 +6,7 @@ import IncomeCategorySubmitter from './components/IncomeCategorySubmitter.vue'
 import TransactionHistoryList from './components/TransactionHistoryList.vue'
 import OutcomeCategoryList from './components/OutcomeCategoryList.vue'
 import OutcomeCategorySubmitter from './components/OutcomeCategorySubmitter.vue'
+import Balance from './components/Balance.vue'
 
 export default {
   components: {
@@ -16,6 +17,7 @@ export default {
     TransactionHistoryList,
     OutcomeCategoryList,
     OutcomeCategorySubmitter,
+    Balance,
   },
 
   data() {
@@ -79,11 +81,7 @@ export default {
                 <p class="fs-1 text-left">Wallet</p>
               </div>
             </div>
-            <div class="col">
-              <div class="p-3 text-center">
-                <p id="balance" class="fs-1 text-right">{{ balance }}</p>
-              </div>
-            </div>
+            <Balance v-bind:balance="balance" />
           </div>
           <div class="row gx-5">
             <div class="col">
