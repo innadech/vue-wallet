@@ -1,24 +1,18 @@
 <script>
 export default {
-  props: ['incomecategory'],
+  props: ['category'],
 
   emits: ['incomecategory-deleted'],
-
-  data() {
-    return {
-      localIncomecategory: { ...this.incomecategory },
-    }
-  },
 }
 </script>
 
 <template>
   <li class="m-3">
-    <span>{{ localIncomecategory.caption }}</span>
+    <span>{{ category.caption }}</span>
     <button
       type="button"
       class="btn btn-secondary btn-sm ms-3"
-      v-on:click="$emit('incomecategory-deleted', localIncomecategory.id)"
+      v-on:click="$emit('incomecategory-deleted', category.id)"
     >
       Delete
     </button>
