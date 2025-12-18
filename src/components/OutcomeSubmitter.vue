@@ -2,7 +2,7 @@
 export default {
   emits: ['outcome-submitted'],
 
-  props: ['outcomeCategory'],
+  props: ['outcomeCategories'],
 
   data() {
     return {
@@ -46,10 +46,11 @@ export default {
         v-bind:value="newOutcome.category"
         v-on:change="newOutcome.category = $event.target.value"
         class="form-select"
-        id="outcome"
       >
-        <option selected>Choose...</option>
-        <option v-for="ic of outcomeCategory" :key="id">{{ ic }}</option>
+        <!-- <option selected>Choose...</option> -->
+        <option v-for="oc of outcomeCategories" :key="oc.id">
+          {{ oc.caption }}
+        </option>
       </select>
     </div>
     <div class="input-group mb-3">
@@ -57,7 +58,6 @@ export default {
         >Enter amount</span
       >
       <input
-        id="expenseamount"
         type="text"
         class="form-control"
         aria-label="Sizing example input"
@@ -69,7 +69,6 @@ export default {
     </div>
     <button
       v-on:click="submitOutcome"
-      id="expenseadd"
       type="button"
       class="btn btn-primary btn-lg"
     >

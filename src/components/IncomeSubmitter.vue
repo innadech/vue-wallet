@@ -69,7 +69,6 @@ export default {
     </div>
     <button
       v-on:click="submitIncome"
-      id="incomeadd"
       type="button"
       class="btn btn-primary btn-lg"
     >

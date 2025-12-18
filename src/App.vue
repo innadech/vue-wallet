@@ -66,6 +66,7 @@ export default {
   <body data-bs-theme="blue">
     <div>transaction{{ transactionHistory }}</div>
     <div>incomeCategories{{ incomeCategories }}</div>
+    <div>outcomeCategories{{ outcomeCategories }}</div>
 
     <div class="container">
       <div
@@ -92,7 +93,10 @@ export default {
               />
             </div>
             <div class="col">
-              <OutcomeSubmitter v-on:outcome-submitted="outcomeSubmit" />
+              <OutcomeSubmitter
+                v-bind:outcomeCategories="outcomeCategories"
+                v-on:outcome-submitted="outcomeSubmit"
+              />
             </div>
           </div>
         </div>
