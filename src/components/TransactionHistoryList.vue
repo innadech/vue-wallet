@@ -19,12 +19,15 @@ export default {
 </script>
 
 <template>
-  <ul>
-    <IncomeCategoryItem
-      v-for="transaction of transactionHistory"
-      v-bind:key="transaction.id"
-      v-bind:transaction="transaction"
-      v-on:transaction-deleted="deleteTransaction($event)"
-    />
-  </ul>
+  <div class="container px-4 text-left">
+    <p class="fs-1 text-left">Transaction History</p>
+    <ul class="list-group">
+      <IncomeCategoryItem
+        v-for="transaction of transactionHistory"
+        v-bind:key="transaction.id"
+        v-bind:transaction="transaction"
+        v-on:transaction-deleted="deleteTransaction($event)"
+      />
+    </ul>
+  </div>
 </template>

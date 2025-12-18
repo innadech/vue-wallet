@@ -3,6 +3,7 @@ import IncomeSubmitter from './components/IncomeSubmitter.vue'
 import OutcomeSubmitter from './components/OutcomeSubmitter.vue'
 import IncomeCategotyList from './components/IncomeCategotyList.vue'
 import IncomeCategorySubmitter from './components/IncomeCategorySubmitter.vue'
+import TransactionHistoryList from './components/TransactionHistoryList.vue'
 
 export default {
   components: {
@@ -10,6 +11,7 @@ export default {
     OutcomeSubmitter,
     IncomeCategotyList,
     IncomeCategorySubmitter,
+    TransactionHistoryList,
   },
 
   data() {
@@ -126,15 +128,10 @@ export default {
             </div>
           </div>
         </div>
-        <div class="container px-4 text-left">
-          <p class="fs-1 text-left">Transaction History</p>
-          <ul id="transaction-history" class="list-group">
-            <!-- <li class="list-group-item list-group-item-success">A simple success list group item
-              <button type="button" class="btn-close" aria-label="Close"></button>
-            </li>
-            <li class="list-group-item list-group-item-danger">A simple danger list group item</li> -->
-          </ul>
-        </div>
+        <TransactionHistoryList
+          v-bind:transactionHistory="transactionHistory"
+          v-on:history-deleted="transactionHistory = $event"
+        />
       </div>
     </div>
   </body>
