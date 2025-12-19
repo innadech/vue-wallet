@@ -6,12 +6,12 @@ export default {
 
   props: ['outcomeCategories'],
 
-  emit: ['outcomeCategories-deleted'],
+  emit: ['updated'],
 
   methods: {
     deleteOutcomeCategory(id) {
       this.$emit(
-        'outcomeCategories-deleted',
+        'updated',
         this.outcomeCategories.filter(outcome => outcome.id !== id)
       )
     },

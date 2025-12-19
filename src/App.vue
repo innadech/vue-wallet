@@ -84,13 +84,13 @@ export default {
           <div class="row gx-5">
             <div class="col">
               <IncomeSubmitter
-                v-bind:incomeCategories="incomeCategories"
+                v-bind:income-categories="incomeCategories"
                 v-on:income-submitted="incomeSubmit"
               />
             </div>
             <div class="col">
               <OutcomeSubmitter
-                v-bind:outcomeCategories="outcomeCategories"
+                v-bind:outcome-categories="outcomeCategories"
                 v-on:outcome-submitted="outcomeSubmit"
               />
             </div>
@@ -101,32 +101,32 @@ export default {
             <div class="row gx-5">
               <div class="col">
                 <IncomeCategoryList
-                  v-bind:incomeCategories="incomeCategories"
-                  v-on:incomeCategories-deleted="incomeCategories = $event"
+                  v-bind:income-categories="incomeCategories"
+                  v-on:income-categories-deleted="incomeCategories = $event"
                 />
                 <IncomeCategorySubmitter
-                  v-on:incomecategory-submitted="submitIncomeCategory($event)"
+                  v-on:incomecategory-submitted="incomeCategories.push($event)"
                 />
               </div>
               <div class="col">
                 <OutcomeCategoryList
-                  v-bind:outcomeCategories="outcomeCategories"
-                  v-on:outcomeCategories-deleted="outcomeCategories = $event"
+                  v-bind:outcome-categories="outcomeCategories"
+                  v-on:updated="outcomeCategories = $event"
                 />
                 <OutcomeCategorySubmitter
-                  v-on:outcomecategory-submitted="submitOutcomeCategory($event)"
+                  v-on:outcomecategory-submitted="
+                    outcomeCategories.push(outcomegategory)
+                  "
                 />
               </div>
             </div>
           </div>
         </div>
         <TransactionHistoryList
-          v-bind:transactionHistory="transactionHistory"
+          v-bind:transaction-history="transactionHistory"
           v-on:history-deleted="transactionHistory = $event"
         />
       </div>
     </div>
   </div>
 </template>
-
-<style scoped></style>
