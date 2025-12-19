@@ -37,9 +37,7 @@ export default {
 </script>
 
 <template>
-  <div
-    class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3"
-  >
+  <div class="p-3 text-primary-emphasis bg-primary-subtle border rounded-3">
     <div class="input-group mb-3">
       <label class="input-group-text" for="outcome">Outcome</label>
       <select

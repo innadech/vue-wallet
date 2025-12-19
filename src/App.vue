@@ -6,7 +6,7 @@ import IncomeCategorySubmitter from './components/IncomeCategorySubmitter.vue'
 import TransactionHistoryList from './components/TransactionHistoryList.vue'
 import OutcomeCategoryList from './components/OutcomeCategoryList.vue'
 import OutcomeCategorySubmitter from './components/OutcomeCategorySubmitter.vue'
-import Balance from './components/Balance.vue'
+import BalanceWidget from './components/BalanceWidget.vue'
 
 export default {
   components: {
@@ -17,7 +17,7 @@ export default {
     TransactionHistoryList,
     OutcomeCategoryList,
     OutcomeCategorySubmitter,
-    Balance,
+    BalanceWidget,
   },
 
   data() {
@@ -65,15 +65,13 @@ export default {
 </script>
 
 <template>
-  <body data-bs-theme="blue">
+  <div>
     <div>transaction{{ transactionHistory }}</div>
     <div>incomeCategories{{ incomeCategories }}</div>
     <div>outcomeCategories{{ outcomeCategories }}</div>
 
     <div class="container">
-      <div
-        class="container-fluid mt-3 bg-light-subtle border border-primary-subtle rounded-3"
-      >
+      <div class="container-fluid mt-3 bg-light-subtle border rounded-3">
         <div class="container px-4 text-left">
           <div class="row gx-5">
             <div class="col">
@@ -81,7 +79,7 @@ export default {
                 <p class="fs-1 text-left">Wallet</p>
               </div>
             </div>
-            <Balance v-bind:balance="balance" />
+            <BalanceWidget v-bind:balance="balance" />
           </div>
           <div class="row gx-5">
             <div class="col">
@@ -128,7 +126,7 @@ export default {
         />
       </div>
     </div>
-  </body>
+  </div>
 </template>
 
 <style scoped></style>
