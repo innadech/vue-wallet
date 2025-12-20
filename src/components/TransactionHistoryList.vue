@@ -5,12 +5,12 @@ export default {
 
   props: ['transactionHistory'],
 
-  emit: ['history-deleted'],
+  emit: ['updated'],
 
   methods: {
     deleteTransaction(id) {
       this.$emit(
-        'history-deleted',
+        'updated',
         this.transactionHistory.filter(t => t.id !== id)
       )
     },

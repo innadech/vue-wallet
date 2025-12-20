@@ -1,22 +1,22 @@
 <script>
 import IncomeSubmitter from './components/IncomeSubmitter.vue'
-import OutcomeSubmitter from './components/OutcomeSubmitter.vue'
+import ExpenseSubmitter from './components/ExpenseSubmitter.vue'
 import IncomeCategoryList from './components/IncomeCategoryList.vue'
 import IncomeCategorySubmitter from './components/IncomeCategorySubmitter.vue'
 import TransactionHistoryList from './components/TransactionHistoryList.vue'
-import OutcomeCategoryList from './components/OutcomeCategoryList.vue'
-import OutcomeCategorySubmitter from './components/OutcomeCategorySubmitter.vue'
+import ExpenseCategoryList from './components/ExpenseCategoryList.vue'
+import ExpenseCategorySubmitter from './components/ExpenseCategorySubmitter.vue'
 import BalanceWidget from './components/BalanceWidget.vue'
 
 export default {
   components: {
     IncomeSubmitter,
-    OutcomeSubmitter,
+    ExpenseSubmitter,
     IncomeCategoryList,
     IncomeCategorySubmitter,
     TransactionHistoryList,
-    OutcomeCategoryList,
-    OutcomeCategorySubmitter,
+    ExpenseCategoryList,
+    ExpenseCategorySubmitter,
     BalanceWidget,
   },
 
@@ -24,16 +24,16 @@ export default {
     return {
       transactionHistory: [],
       incomeCategories: [],
-      outcomeCategories: [],
+      expenseCategories: [],
     }
   },
   methods: {
-    incomeSubmit(income) {
-      this.transactionHistory.push(income)
-    },
-    outcomeSubmit(outcome) {
-      this.transactionHistory.push(outcome)
-    },
+    // incomeSubmit(income) {
+    //   this.transactionHistory.push(income)
+    // },
+    // outcomeSubmit(outcome) {
+    //   this.transactionHistory.push(outcome)
+    // },
 
     getSumAmountByType() {
       let amountIncome = 0
@@ -48,11 +48,11 @@ export default {
       return [amountIncome, amountOutcome]
     },
 
-    submitIncomeCategory(incomegategory) {
-      this.incomeCategories.push(incomegategory)
+    submitIncomeCategory(category) {
+      this.incomeCategories.push(category)
     },
-    submitOutcomeCategory(outcomegategory) {
-      this.outcomeCategories.push(outcomegategory)
+    submitExpenseCategory(category) {
+      this.expenseCategories.push(category)
     },
   },
   computed: {
@@ -65,13 +65,15 @@ export default {
 </script>
 
 <template>
-  <div>
+  <body data-bs-theme="blue">
     <div>transaction{{ transactionHistory }}</div>
     <div>incomeCategories{{ incomeCategories }}</div>
-    <div>outcomeCategories{{ outcomeCategories }}</div>
+    <div>outcomeCategories{{ expenseCategories }}</div>
 
     <div class="container">
-      <div class="container-fluid mt-3 bg-light-subtle border rounded-3">
+      <div
+        class="container-fluid mt-3 bg-light-subtle border border-primary-subtle rounded-3"
+      >
         <div class="container px-4 text-left">
           <div class="row gx-5">
             <div class="col">
@@ -84,14 +86,14 @@ export default {
           <div class="row gx-5">
             <div class="col">
               <IncomeSubmitter
-                v-bind:income-categories="incomeCategories"
-                v-on:income-submitted="incomeSubmit"
+                v-bind:incomeCategories="incomeCategories"
+                v-on:income-submitted="transactionHistory.push($event)"
               />
             </div>
             <div class="col">
-              <OutcomeSubmitter
-                v-bind:outcome-categories="outcomeCategories"
-                v-on:outcome-submitted="outcomeSubmit"
+              <ExpenseSubmitter
+                v-bind:expenseCategories="expenseCategories"
+                v-on:expense-submitted="transactionHistory.push($event)"
               />
             </div>
           </div>
@@ -101,32 +103,30 @@ export default {
             <div class="row gx-5">
               <div class="col">
                 <IncomeCategoryList
-                  v-bind:income-categories="incomeCategories"
-                  v-on:income-categories-deleted="incomeCategories = $event"
+                  v-bind:incomeCategories="incomeCategories"
+                  v-on:updated="incomeCategories = $event"
                 />
                 <IncomeCategorySubmitter
-                  v-on:incomecategory-submitted="incomeCategories.push($event)"
+                  v-on:category-submitted="submitIncomeCategory($event)"
                 />
               </div>
               <div class="col">
-                <OutcomeCategoryList
-                  v-bind:outcome-categories="outcomeCategories"
-                  v-on:updated="outcomeCategories = $event"
+                <ExpenseCategoryList
+                  v-bind:expense-categories="expenseCategories"
+                  v-on:updated="expenseCategories = $event"
                 />
-                <OutcomeCategorySubmitter
-                  v-on:outcomecategory-submitted="
-                    outcomeCategories.push(outcomegategory)
-                  "
+                <ExpenseCategorySubmitter
+                  v-on:category-submitted="submitExpenseCategory($event)"
                 />
               </div>
             </div>
           </div>
         </div>
         <TransactionHistoryList
-          v-bind:transaction-history="transactionHistory"
-          v-on:history-deleted="transactionHistory = $event"
+          v-bind:transactionHistory="transactionHistory"
+          v-on:updated="transactionHistory = $event"
         />
       </div>
     </div>
-  </div>
+  </body>
 </template>

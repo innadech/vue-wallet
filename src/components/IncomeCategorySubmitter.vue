@@ -1,6 +1,6 @@
 <script>
 export default {
-  emits: ['incomecategory-submitted'],
+  emits: ['category-submitted'],
 
   data() {
     return {
@@ -13,7 +13,7 @@ export default {
       if (this.newIncomecategory.caption) {
         this.newIncomecategory.caption =
           this.newIncomecategory.caption.toLowerCase()
-        this.$emit('incomecategory-submitted', { ...this.newIncomecategory })
+        this.$emit('category-submitted', { ...this.newIncomecategory })
         this.newIncomecategory = this.initIncomecategory()
         this.$refs.elInput.focus()
       }

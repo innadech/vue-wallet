@@ -70,7 +70,7 @@ export default {
       type="button"
       class="btn btn-primary btn-lg"
     >
-      Add button
+      Add income
     </button>
   </div>
 </template>

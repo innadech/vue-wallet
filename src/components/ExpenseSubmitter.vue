@@ -1,8 +1,8 @@
 <script>
 export default {
-  emits: ['outcome-submitted'],
+  emits: ['expense-submitted'],
 
-  props: ['outcomeCategories'],
+  props: ['expenseCategories'],
 
   data() {
     return {
@@ -14,7 +14,7 @@ export default {
     submitOutcome() {
       if (this.newOutcome.category) {
         this.newOutcome.category = this.newOutcome.category.toLowerCase()
-        this.$emit('outcome-submitted', { ...this.newOutcome })
+        this.$emit('expense-submitted', { ...this.newOutcome })
         this.newOutcome = this.currentOutcome()
         this.$refs.elInput.focus()
       }
@@ -39,17 +39,17 @@ export default {
 <template>
   <div class="p-3 text-primary-emphasis bg-primary-subtle border rounded-3">
     <div class="input-group mb-3">
-      <label class="input-group-text" for="outcome">Outcome</label>
+      <label class="input-group-text" for="outcome">Expense</label>
       <select
         v-bind:value="newOutcome.category"
         v-on:change="newOutcome.category = $event.target.value"
         class="form-select"
       >
         <!-- <option selected>Choose...</option> -->
-        <option v-for="oc of outcomeCategories" :key="oc.id">
+        <option v-for="oc of expenseCategories" :key="oc.id">
           {{ oc.caption }}
-        </option>
-      </select>
+        </option></select
+      >``
     </div>
     <div class="input-group mb-3">
       <span class="input-group-text" id="inputGroup-sizing-default"
@@ -70,7 +70,7 @@ export default {
       type="button"
       class="btn btn-primary btn-lg"
     >
-      Add button
+      Add expense
     </button>
   </div>
 </template>

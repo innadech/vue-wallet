@@ -5,12 +5,12 @@ export default {
 
   props: ['incomeCategories'],
 
-  emit: ['incomeCategories-deleted'],
+  emit: ['updated'],
 
   methods: {
     deleteIncomeCategory(id) {
       this.$emit(
-        'incomeCategories-deleted',
+        'updated',
         this.incomeCategories.filter(income => income.id !== id)
       )
     },

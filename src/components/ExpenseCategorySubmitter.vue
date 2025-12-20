@@ -1,6 +1,6 @@
 <script>
 export default {
-  emits: ['outcomecategory-submitted'],
+  emits: ['category-submitted'],
 
   data() {
     return {
@@ -9,11 +9,11 @@ export default {
   },
 
   methods: {
-    addOutcomeCategory() {
+    addCategory() {
       if (this.newOutcomecategory.caption) {
         this.newOutcomecategory.caption =
           this.newOutcomecategory.caption.toLowerCase()
-        this.$emit('outcomecategory-submitted', { ...this.newOutcomecategory })
+        this.$emit('category-submitted', { ...this.newOutcomecategory })
         this.newOutcomecategory = this.initOutcomecategory()
         this.$refs.elInput.focus()
       }
@@ -39,8 +39,8 @@ export default {
     <input
       type="text"
       class="form-control"
-      placeholder="add outcome category"
-      aria-label="add outcome category"
+      placeholder="add expense category"
+      aria-label="add expense category"
       ref="elInput"
       v-bind:value="newOutcomecategory.caption"
       v-on:input="newOutcomecategory.caption = $event.target.value"
@@ -48,7 +48,7 @@ export default {
     <button
       class="btn btn-outline-secondary"
       type="button"
-      v-on:click="addOutcomeCategory"
+      v-on:click="addCategory"
     >
       Add
     </button>
