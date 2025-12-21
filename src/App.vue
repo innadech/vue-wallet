@@ -31,21 +31,21 @@ export default {
     // incomeSubmit(income) {
     //   this.transactionHistory.push(income)
     // },
-    // outcomeSubmit(outcome) {
-    //   this.transactionHistory.push(outcome)
+    // expenseSubmit(expense) {
+    //   this.transactionHistory.push(expense)
     // },
 
     getSumAmountByType() {
       let amountIncome = 0
-      let amountOutcome = 0
+      let amountExpense = 0
       this.transactionHistory.forEach(history => {
         if (history.type === 'income') {
           amountIncome += +history.amount
         } else {
-          amountOutcome += +history.amount
+          amountExpense += +history.amount
         }
       })
-      return [amountIncome, amountOutcome]
+      return [amountIncome, amountExpense]
     },
 
     submitIncomeCategory(category) {
@@ -57,8 +57,8 @@ export default {
   },
   computed: {
     balance() {
-      const [incomeSum, outcomeSum] = this.getSumAmountByType()
-      return 'Balance: ' + (+incomeSum - +outcomeSum)
+      const [incomeSum, expenseSum] = this.getSumAmountByType()
+      return 'Balance: ' + (+incomeSum - +expenseSum)
     },
   },
 }
@@ -68,7 +68,7 @@ export default {
   <body data-bs-theme="blue">
     <div>transaction{{ transactionHistory }}</div>
     <div>incomeCategories{{ incomeCategories }}</div>
-    <div>outcomeCategories{{ expenseCategories }}</div>
+    <div>expenseCategories{{ expenseCategories }}</div>
 
     <div class="container">
       <div

@@ -4,26 +4,26 @@ export default {
 
   data() {
     return {
-      newOutcomecategory: this.initOutcomecategory(),
+      newExpensecategory: this.initExpensecategory(),
     }
   },
 
   methods: {
     addCategory() {
-      if (this.newOutcomecategory.caption) {
-        this.newOutcomecategory.caption =
-          this.newOutcomecategory.caption.toLowerCase()
-        this.$emit('category-submitted', { ...this.newOutcomecategory })
-        this.newOutcomecategory = this.initOutcomecategory()
+      if (this.newExpensecategory.caption) {
+        this.newExpensecategory.caption =
+          this.newExpensecategory.caption.toLowerCase()
+        this.$emit('category-submitted', { ...this.newExpensecategory })
+        this.newExpensecategory = this.initExpensecategory()
         this.$refs.elInput.focus()
       }
     },
 
-    initOutcomecategory() {
+    initExpensecategory() {
       return {
         id: this.makeId(),
         caption: '',
-        type: 'outcome',
+        type: 'expense',
       }
     },
 
@@ -42,8 +42,8 @@ export default {
       placeholder="add expense category"
       aria-label="add expense category"
       ref="elInput"
-      v-bind:value="newOutcomecategory.caption"
-      v-on:input="newOutcomecategory.caption = $event.target.value"
+      v-bind:value="newExpensecategory.caption"
+      v-on:input="newExpensecategory.caption = $event.target.value"
     />
     <button
       class="btn btn-outline-secondary"

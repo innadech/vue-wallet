@@ -6,26 +6,26 @@ export default {
 
   data() {
     return {
-      newOutcome: this.currentOutcome(),
+      newExpense: this.currentExpense(),
     }
   },
 
   methods: {
-    submitOutcome() {
-      if (this.newOutcome.category) {
-        this.newOutcome.category = this.newOutcome.category.toLowerCase()
-        this.$emit('expense-submitted', { ...this.newOutcome })
-        this.newOutcome = this.currentOutcome()
+    submitExpense() {
+      if (this.newExpense.category) {
+        this.newExpense.category = this.newExpense.category.toLowerCase()
+        this.$emit('expense-submitted', { ...this.newExpense })
+        this.newExpense = this.currentExpense()
         this.$refs.elInput.focus()
       }
     },
 
-    currentOutcome() {
+    currentExpense() {
       return {
         id: this.makeId(),
         amount: 0,
         category: '',
-        type: 'outcome',
+        type: 'expense',
       }
     },
 
@@ -39,10 +39,10 @@ export default {
 <template>
   <div class="p-3 text-primary-emphasis bg-primary-subtle border rounded-3">
     <div class="input-group mb-3">
-      <label class="input-group-text" for="outcome">Expense</label>
+      <label class="input-group-text" for="expense">Expense</label>
       <select
-        v-bind:value="newOutcome.category"
-        v-on:change="newOutcome.category = $event.target.value"
+        v-bind:value="newExpense.category"
+        v-on:change="newExpense.category = $event.target.value"
         class="form-select"
       >
         <!-- <option selected>Choose...</option> -->
@@ -60,13 +60,13 @@ export default {
         class="form-control"
         aria-label="Sizing example input"
         aria-describedby="inputGroup-sizing-default"
-        v-bind:value="newOutcome.amount"
-        v-on:input="newOutcome.amount = $event.target.value"
+        v-bind:value="newExpense.amount"
+        v-on:input="newExpense.amount = $event.target.value"
         ref="elInput"
       />
     </div>
     <button
-      v-on:click="submitOutcome"
+      v-on:click="submitExpense"
       type="button"
       class="btn btn-primary btn-lg"
     >
