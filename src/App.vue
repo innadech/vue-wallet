@@ -1,19 +1,15 @@
 <script>
-import IncomeSubmitter from './components/IncomeSubmitter.vue'
 import ExpenseSubmitter from './components/ExpenseSubmitter.vue'
-import IncomeCategoryList from './components/IncomeCategoryList.vue'
-import IncomeCategorySubmitter from './components/IncomeCategorySubmitter.vue'
 import TransactionHistoryList from './components/TransactionHistoryList.vue'
 import ExpenseCategoryList from './components/ExpenseCategoryList.vue'
 import ExpenseCategorySubmitter from './components/ExpenseCategorySubmitter.vue'
 import BalanceWidget from './components/BalanceWidget.vue'
+import IncomeWidget from './components/income/IncomeWidget.vue'
 
 export default {
   components: {
-    IncomeSubmitter,
+    IncomeWidget,
     ExpenseSubmitter,
-    IncomeCategoryList,
-    IncomeCategorySubmitter,
     TransactionHistoryList,
     ExpenseCategoryList,
     ExpenseCategorySubmitter,
@@ -23,18 +19,10 @@ export default {
   data() {
     return {
       transactionHistory: [],
-      incomeCategories: [],
       expenseCategories: [],
     }
   },
   methods: {
-    // incomeSubmit(income) {
-    //   this.transactionHistory.push(income)
-    // },
-    // expenseSubmit(expense) {
-    //   this.transactionHistory.push(expense)
-    // },
-
     getSumAmountByType() {
       let amountIncome = 0
       let amountExpense = 0
@@ -46,10 +34,6 @@ export default {
         }
       })
       return [amountIncome, amountExpense]
-    },
-
-    submitIncomeCategory(category) {
-      this.incomeCategories.push(category)
     },
     submitExpenseCategory(category) {
       this.expenseCategories.push(category)
@@ -67,9 +51,7 @@ export default {
 <template>
   <body data-bs-theme="blue">
     <div>transaction{{ transactionHistory }}</div>
-    <div>incomeCategories{{ incomeCategories }}</div>
     <div>expenseCategories{{ expenseCategories }}</div>
-
     <div class="container">
       <div
         class="container-fluid mt-3 bg-light-subtle border border-primary-subtle rounded-3"
@@ -84,19 +66,7 @@ export default {
             <BalanceWidget v-bind:balance="balance" />
           </div>
           <div class="row gx-5">
-            <div class="col">
-              <IncomeSubmitter
-                v-bind:incomeCategories="incomeCategories"
-                v-on:income-submitted="transactionHistory.push($event)"
-              />
-              <IncomeCategoryList
-                v-bind:incomeCategories="incomeCategories"
-                v-on:updated="incomeCategories = $event"
-              />
-              <IncomeCategorySubmitter
-                v-on:category-submitted="submitIncomeCategory($event)"
-              />
-            </div>
+            <IncomeWidget v-on:submitted="transactionHistory.push($event)" />
             <div class="col">
               <ExpenseSubmitter
                 v-bind:expenseCategories="expenseCategories"
