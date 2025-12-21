@@ -89,36 +89,26 @@ export default {
                 v-bind:incomeCategories="incomeCategories"
                 v-on:income-submitted="transactionHistory.push($event)"
               />
+              <IncomeCategoryList
+                v-bind:incomeCategories="incomeCategories"
+                v-on:updated="incomeCategories = $event"
+              />
+              <IncomeCategorySubmitter
+                v-on:category-submitted="submitIncomeCategory($event)"
+              />
             </div>
             <div class="col">
               <ExpenseSubmitter
                 v-bind:expenseCategories="expenseCategories"
                 v-on:expense-submitted="transactionHistory.push($event)"
               />
-            </div>
-          </div>
-        </div>
-        <div class="container px-4 text-left">
-          <div class="container overflow-hidden text-center">
-            <div class="row gx-5">
-              <div class="col">
-                <IncomeCategoryList
-                  v-bind:incomeCategories="incomeCategories"
-                  v-on:updated="incomeCategories = $event"
-                />
-                <IncomeCategorySubmitter
-                  v-on:category-submitted="submitIncomeCategory($event)"
-                />
-              </div>
-              <div class="col">
-                <ExpenseCategoryList
-                  v-bind:expense-categories="expenseCategories"
-                  v-on:updated="expenseCategories = $event"
-                />
-                <ExpenseCategorySubmitter
-                  v-on:category-submitted="submitExpenseCategory($event)"
-                />
-              </div>
+              <ExpenseCategoryList
+                v-bind:expense-categories="expenseCategories"
+                v-on:updated="expenseCategories = $event"
+              />
+              <ExpenseCategorySubmitter
+                v-on:category-submitted="submitExpenseCategory($event)"
+              />
             </div>
           </div>
         </div>

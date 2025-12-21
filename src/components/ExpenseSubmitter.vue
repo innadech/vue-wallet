@@ -48,8 +48,8 @@ export default {
         <!-- <option selected>Choose...</option> -->
         <option v-for="oc of expenseCategories" :key="oc.id">
           {{ oc.caption }}
-        </option></select
-      >``
+        </option>
+      </select>
     </div>
     <div class="input-group mb-3">
       <span class="input-group-text" id="inputGroup-sizing-default"
