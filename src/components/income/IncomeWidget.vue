@@ -1,7 +1,7 @@
 <script>
-import IncomeCategorySubmitter from '../IncomeCategorySubmitter.vue'
-import IncomeCategoryList from '../IncomeCategoryList.vue'
-import IncomeSubmitter from '../IncomeSubmitter.vue'
+import IncomeCategorySubmitter from './IncomeCategorySubmitter.vue'
+import IncomeCategoryList from './IncomeCategoryList.vue'
+import IncomeSubmitter from './IncomeSubmitter.vue'
 
 export default {
   components: { IncomeSubmitter, IncomeCategoryList, IncomeCategorySubmitter },
@@ -20,7 +20,7 @@ export default {
   <div class="col">
     <IncomeSubmitter
       v-bind:income-categories="incomeCategories"
-      v-on:income-submitted="$emit('income-submitted', $event)"
+      v-on:income-submitted="$emit('submitted', $event)"
     />
     <IncomeCategoryList
       v-bind:income-categories="incomeCategories"
