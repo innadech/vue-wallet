@@ -7,9 +7,16 @@ export default {
 </script>
 
 <template>
-  <li class="list-group-item list-group-item-success">
-    <span>{{ transaction.category }}</span>
-    <span>{{ transaction.amount }}</span>
+  <li
+    class="list-group-item"
+    v-bind:class="
+      transaction.type === 'expense'
+        ? 'list-group-item-danger'
+        : 'list-group-item-success'
+    "
+  >
+    <span>{{ transaction.category + ':' }}</span>
+    <span>{{ ' ' + transaction.amount }}</span>
     <button
       type="button"
       class="btn btn-secondary btn-sm ms-3"

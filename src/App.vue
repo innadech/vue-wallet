@@ -1,15 +1,15 @@
 <script>
-import TransactionHistoryList from './components/TransactionHistoryList.vue'
 import BalanceWidget from './components/BalanceWidget.vue'
 import IncomeWidget from './components/income/IncomeWidget.vue'
 import ExpenseWidget from './components/expense/ExpenseWidget.vue'
+import TransactionHistoryWidget from './components/transaction/TransactionHistoryWidget.vue'
 
 export default {
   components: {
     IncomeWidget,
     ExpenseWidget,
-    TransactionHistoryList,
     BalanceWidget,
+    TransactionHistoryWidget,
   },
 
   data() {
@@ -43,7 +43,6 @@ export default {
 <template>
   <body data-bs-theme="blue">
     <div>transaction{{ transactionHistory }}</div>
-
     <div class="container">
       <div
         class="container-fluid mt-3 bg-light-subtle border border-primary-subtle rounded-3"
@@ -55,9 +54,9 @@ export default {
             <ExpenseWidget v-on:submitted="transactionHistory.push($event)" />
           </div>
         </div>
-        <TransactionHistoryList
-          v-bind:transactionHistory="transactionHistory"
-          v-on:updated="transactionHistory = $event"
+        <TransactionHistoryWidget
+          v-bind:transaction-history="transactionHistory"
+          v-on:update="transactionHistory = $event"
         />
       </div>
     </div>

@@ -24,7 +24,7 @@ export default {
   <div class="col">
     <ExpenseSubmitter
       v-bind:expense-categories="expenseCategories"
-      v-on:expense-submitted="$emit('expense-submitted', $event)"
+      v-on:expense-submitted="$emit('submitted', $event)"
     />
     <ExpenseCategoryList
       v-bind:expense-categories="expenseCategories"
