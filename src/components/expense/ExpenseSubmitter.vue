@@ -46,8 +46,8 @@ export default {
         class="form-select"
       >
         <!-- <option selected>Choose...</option> -->
-        <option v-for="oc of expenseCategories" :key="oc.id">
-          {{ oc.caption }}
+        <option v-for="oc of expenseCategories" :key="oc">
+          {{ oc }}
         </option>
       </select>
     </div>

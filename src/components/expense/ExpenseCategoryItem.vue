@@ -8,11 +8,11 @@ export default {
 
 <template>
   <li class="m-3">
-    <span>{{ category.caption }}</span>
+    <span>{{ category }}</span>
     <button
       type="button"
       class="btn btn-secondary btn-sm ms-3"
-      v-on:click="$emit('category-deleted', category.id)"
+      v-on:click="$emit('category-deleted', category)"
     >
       Delete
     </button>

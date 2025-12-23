@@ -14,8 +14,14 @@ export default {
 
   data() {
     return {
-      expenseCategories: [],
+      expenseCategories: new Set(),
     }
+  },
+  methods: {
+    addCategory(category) {
+      this.expenseCategories.add(category)
+      this.expenseCategories = new Set(this.expenseCategories)
+    },
   },
 }
 </script>
@@ -23,15 +29,13 @@ export default {
 <template>
   <div class="col">
     <ExpenseSubmitter
-      v-bind:expense-categories="expenseCategories"
+      v-bind:expense-categories="Array.from(expenseCategories)"
       v-on:expense-submitted="$emit('submitted', $event)"
     />
     <ExpenseCategoryList
-      v-bind:expense-categories="expenseCategories"
-      v-on:updated="expenseCategories = $event"
+      v-bind:expense-categories="Array.from(expenseCategories)"
+      v-on:updated="expenseCategories = new Set($event)"
     />
-    <ExpenseCategorySubmitter
-      v-on:category-submitted="expenseCategories.push($event)"
-    />
+    <ExpenseCategorySubmitter v-on:category-submitted="addCategory" />
   </div>
 </template>
