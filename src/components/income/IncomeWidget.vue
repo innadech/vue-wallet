@@ -10,8 +10,14 @@ export default {
 
   data() {
     return {
-      incomeCategories: [],
+      incomeCategories: new Set(),
     }
+  },
+  methods: {
+    addCategory(category) {
+      this.incomeCategories.add(category)
+      this.incomeCategories = new Set(this.incomeCategories)
+    },
   },
 }
 </script>
@@ -19,15 +25,13 @@ export default {
 <template>
   <div class="col">
     <IncomeSubmitter
-      v-bind:income-categories="incomeCategories"
+      v-bind:income-categories="Array.from(incomeCategories)"
       v-on:income-submitted="$emit('submitted', $event)"
     />
     <IncomeCategoryList
-      v-bind:income-categories="incomeCategories"
-      v-on:updated="incomeCategories = $event"
+      v-bind:income-categories="Array.from(incomeCategories)"
+      v-on:updated="incomeCategories = new Set($event)"
     />
-    <IncomeCategorySubmitter
-      v-on:category-submitted="incomeCategories.push($event)"
-    />
+    <IncomeCategorySubmitter v-on:category-submitted="addCategory" />
   </div>
 </template>

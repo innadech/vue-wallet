@@ -8,10 +8,10 @@ export default {
   emit: ['updated'],
 
   methods: {
-    deleteIncomeCategory(id) {
+    deleteIncomeCategory(categoryName) {
       this.$emit(
         'updated',
-        this.incomeCategories.filter(income => income.id !== id)
+        this.incomeCategories.filter(income => income !== categoryName)
       )
     },
   },
@@ -24,7 +24,7 @@ export default {
     <ul>
       <IncomeCategoryItem
         v-for="category of incomeCategories"
-        v-bind:key="category.id"
+        v-bind:key="category"
         v-bind:category="category"
         v-on:incomecategory-deleted="deleteIncomeCategory($event)"
       />

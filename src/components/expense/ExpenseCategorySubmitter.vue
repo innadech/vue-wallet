@@ -21,10 +21,6 @@ export default {
     initExpensecategory() {
       return ''
     },
-
-    // makeId() {
-    //   return crypto.randomUUID().split('-').at(0)
-    // },
   },
 }
 </script>

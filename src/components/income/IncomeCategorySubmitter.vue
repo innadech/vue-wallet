@@ -10,25 +10,16 @@ export default {
 
   methods: {
     addIncomeCategory() {
-      if (this.newIncomecategory.caption) {
-        this.newIncomecategory.caption =
-          this.newIncomecategory.caption.toLowerCase()
-        this.$emit('category-submitted', { ...this.newIncomecategory })
+      if (this.newIncomecategory) {
+        this.newIncomecategory = this.newIncomecategory.toLowerCase()
+        this.$emit('category-submitted', this.newIncomecategory)
         this.newIncomecategory = this.initIncomecategory()
         this.$refs.elInput.focus()
       }
     },
 
     initIncomecategory() {
-      return {
-        id: this.makeId(),
-        caption: '',
-        type: 'income',
-      }
-    },
-
-    makeId() {
-      return crypto.randomUUID().split('-').at(0)
+      return ''
     },
   },
 }
@@ -42,8 +33,8 @@ export default {
       placeholder="add income category"
       aria-label="add income category"
       ref="elInput"
-      v-bind:value="newIncomecategory.caption"
-      v-on:input="newIncomecategory.caption = $event.target.value"
+      v-bind:value="newIncomecategory"
+      v-on:input="newIncomecategory = $event.target.value"
     />
     <button
       class="btn btn-outline-secondary"
