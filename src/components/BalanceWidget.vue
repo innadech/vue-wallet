@@ -1,6 +1,15 @@
 <script>
 export default {
-  props: ['balance'],
+  props: ['transactionHistory'],
+  computed: {
+    balance() {
+      return this.transactionHistory.reduce(
+        (acc, item) =>
+          item.type === 'income' ? acc + item.amount : acc - item.amount,
+        0
+      )
+    },
+  },
 }
 </script>
 
@@ -13,7 +22,7 @@ export default {
     </div>
     <div class="col">
       <div class="p-3 text-center">
-        <p id="balance" class="fs-1 text-right">{{ balance }}</p>
+        <p id="balance" class="fs-1 text-right">Balance: {{ balance }}</p>
       </div>
     </div>
   </div>

@@ -11,44 +11,23 @@ export default {
     BalanceWidget,
     TransactionHistoryWidget,
   },
-
   data() {
     return {
       transactionHistory: [],
     }
-  },
-  methods: {
-    getSumAmountByType() {
-      let amountIncome = 0
-      let amountExpense = 0
-      this.transactionHistory.forEach(history => {
-        if (history.type === 'income') {
-          amountIncome += +history.amount
-        } else {
-          amountExpense += +history.amount
-        }
-      })
-      return [amountIncome, amountExpense]
-    },
-  },
-  computed: {
-    balance() {
-      const [incomeSum, expenseSum] = this.getSumAmountByType()
-      return 'Balance: ' + (+incomeSum - +expenseSum)
-    },
   },
 }
 </script>
 
 <template>
   <body data-bs-theme="blue">
-    <div>transaction{{ transactionHistory }}</div>
+    <div>{{ transactionHistory }}</div>
     <div class="container">
       <div
-        class="container-fluid mt-3 bg-light-subtle border border-primary-subtle rounded-3"
+        class="container-fluid mt-3 bg-light-subtle border border-subtle rounded-3"
       >
         <div class="container px-4 text-left">
-          <BalanceWidget v-bind:balance="balance" />
+          <BalanceWidget v-bind:transaction-history="transactionHistory" />
           <div class="row gx-5">
             <IncomeWidget v-on:submitted="transactionHistory.push($event)" />
             <ExpenseWidget v-on:submitted="transactionHistory.push($event)" />

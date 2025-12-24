@@ -4,7 +4,7 @@ export default {
 
   data() {
     return {
-      newIncomecategory: this.initIncomecategory(),
+      newIncomecategory: '',
     }
   },
 
@@ -13,13 +13,9 @@ export default {
       if (this.newIncomecategory) {
         this.newIncomecategory = this.newIncomecategory.toLowerCase()
         this.$emit('category-submitted', this.newIncomecategory)
-        this.newIncomecategory = this.initIncomecategory()
+        this.newIncomecategory = ''
         this.$refs.elInput.focus()
       }
-    },
-
-    initIncomecategory() {
-      return ''
     },
   },
 }
@@ -43,5 +39,8 @@ export default {
     >
       Add
     </button>
+  </div>
+  <div>
+    <span color="error">такая категория уже сущесвует</span>
   </div>
 </template>

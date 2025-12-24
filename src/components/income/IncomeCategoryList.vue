@@ -11,7 +11,13 @@ export default {
     deleteIncomeCategory(categoryName) {
       this.$emit(
         'updated',
-        this.incomeCategories.filter(income => income !== categoryName)
+        new Set(this.incomeCategories).delete(categoryName)
+
+        // new Set(
+        //   Array.from(this.incomeCategories).filter(
+        //     income => income !== categoryName
+        //   )
+        // )
       )
     },
   },
