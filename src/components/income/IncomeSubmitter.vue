@@ -12,11 +12,16 @@ export default {
 
   methods: {
     submitIncome() {
-      if (this.newIncome.category) {
+      const cleanString = String(this.newIncome.amount).replaceAll(' ', '')
+      const amount = parseInt(cleanString) || 0
+      if (cleanString !== '' && amount > 0 && this.newIncome.category) {
+        this.newIncome.isError = false
         this.newIncome.category = this.newIncome.category.toLowerCase()
         this.$emit('income-submitted', { ...this.newIncome })
         this.newIncome = this.currentIncome()
         this.$refs.elInput.focus()
+      } else {
+        this.newIncome.isError = true
       }
     },
 
@@ -26,6 +31,7 @@ export default {
         amount: 0,
         category: '',
         type: 'income',
+        isError: false,
       }
     },
 
@@ -56,14 +62,21 @@ export default {
         >Enter amount</span
       >
       <input
-        type="text"
+        type="number"
+        v-bind:class="
+          newIncome.isError ? 'form-control border-danger' : 'form-control'
+        "
         class="form-control"
         aria-label="Sizing example input"
         aria-describedby="inputGroup-sizing-default"
         v-bind:value="newIncome.amount"
-        v-on:input="newIncome.amount = $event.target.value"
+        v-on:input="newIncome.amount = +$event.target.value"
         ref="elInput"
       />
+
+      <div>
+        <p v-if="newIncome.isError" style="color: red">Inserte number</p>
+      </div>
     </div>
     <button
       v-on:click="submitIncome"

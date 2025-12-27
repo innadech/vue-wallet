@@ -35,6 +35,7 @@ export default {
       ref="elInput"
       v-bind:value="newExpensecategory"
       v-on:input="newExpensecategory = $event.target.value"
+      v-on:keypress.enter="addCategory"
     />
     <button
       class="btn btn-outline-secondary"
