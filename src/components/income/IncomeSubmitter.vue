@@ -75,7 +75,7 @@ export default {
       />
 
       <div>
-        <p v-if="newIncome.isError" style="color: red">Inserte number</p>
+        <p v-if="newIncome.isError" style="color: red">Insert correct number</p>
       </div>
     </div>
     <button

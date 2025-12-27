@@ -12,11 +12,15 @@ export default {
 
   methods: {
     submitExpense() {
-      if (this.newExpense.category) {
+      const cleanString = String(this.newExpense.amount).replaceAll(' ', '')
+      const amount = parseInt(cleanString) || 0
+      if (cleanString !== '' && amount > 0 && this.newExpense.category) {
         this.newExpense.category = this.newExpense.category.toLowerCase()
         this.$emit('expense-submitted', { ...this.newExpense })
         this.newExpense = this.currentExpense()
         this.$refs.elInput.focus()
+      } else {
+        this.newExpense.isError = true
       }
     },
 
@@ -26,6 +30,7 @@ export default {
         amount: 0,
         category: '',
         type: 'expense',
+        isError: false,
       }
     },
 
@@ -56,7 +61,10 @@ export default {
         >Enter amount</span
       >
       <input
-        type="text"
+        type="number"
+        v-bind:class="
+          newExpense.isError ? 'form-control border-danger' : 'form-control'
+        "
         class="form-control"
         aria-label="Sizing example input"
         aria-describedby="inputGroup-sizing-default"
@@ -64,6 +72,11 @@ export default {
         v-on:input="newExpense.amount = $event.target.value"
         ref="elInput"
       />
+      <div>
+        <p v-if="newExpense.isError" style="color: red">
+          Insert correct number
+        </p>
+      </div>
     </div>
     <button
       v-on:click="submitExpense"

@@ -5,16 +5,19 @@ export default {
   data() {
     return {
       newExpensecategory: this.initExpensecategory(),
+      isError: false,
     }
   },
 
   methods: {
     addCategory() {
-      if (this.newExpensecategory) {
+      if (this.newExpensecategory.trim() !== '') {
         this.newExpensecategory = this.newExpensecategory.toLowerCase()
         this.$emit('category-submitted', this.newExpensecategory)
         this.newExpensecategory = this.initExpensecategory()
         this.$refs.elInput.focus()
+      } else {
+        this.isError = true
       }
     },
 
@@ -29,6 +32,7 @@ export default {
   <div class="input-group mb-3">
     <input
       type="text"
+      v-bind:class="isError ? 'form-control is-invalid' : 'form-control'"
       class="form-control"
       placeholder="add expense category"
       aria-label="add expense category"
@@ -44,5 +48,8 @@ export default {
     >
       Add
     </button>
+  </div>
+  <div>
+    <span v-if="isError" style="color: red">Such category is exited</span>
   </div>
 </template>
