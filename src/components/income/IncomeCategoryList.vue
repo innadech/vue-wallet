@@ -9,9 +9,12 @@ export default {
 
   methods: {
     deleteIncomeCategory(categoryName) {
+      let newSet = new Set(this.incomeCategories)
+      newSet.delete(categoryName)
+
       this.$emit(
         'updated',
-        new Set(this.incomeCategories).delete(categoryName)
+        newSet
 
         // new Set(
         //   Array.from(this.incomeCategories).filter(

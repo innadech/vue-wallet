@@ -7,22 +7,27 @@ export default {
   data() {
     return {
       newIncome: this.currentIncome(),
+      err: null,
     }
   },
 
   methods: {
     submitIncome() {
+      this.err = null
       const cleanString = String(this.newIncome.amount).replaceAll(' ', '')
       const amount = parseInt(cleanString) || 0
-      if (cleanString !== '' && amount > 0 && this.newIncome.category) {
-        this.newIncome.isError = false
-        this.newIncome.category = this.newIncome.category.toLowerCase()
-        this.$emit('income-submitted', { ...this.newIncome })
-        this.newIncome = this.currentIncome()
-        this.$refs.elInput.focus()
-      } else {
-        this.newIncome.isError = true
+      if (cleanString === '' || amount <= 0) {
+        this.err = 'Insert correct number'
+        return
       }
+      if (!this.newIncome.category) {
+        this.err = 'Select category'
+        return
+      }
+      this.newIncome.category = this.newIncome.category.toLowerCase()
+      this.$emit('income-submitted', { ...this.newIncome })
+      this.newIncome = this.currentIncome()
+      this.$refs.elInput.focus()
     },
 
     currentIncome() {
@@ -31,7 +36,6 @@ export default {
         amount: 0,
         category: '',
         type: 'income',
-        isError: false,
       }
     },
 
@@ -51,7 +55,7 @@ export default {
         v-on:change="newIncome.category = $event.target.value"
         class="form-select"
       >
-        <!-- <option selected>Choose...</option> -->
+        <option value="">Choose...</option>
         <option v-for="ic of incomeCategories" :key="ic">
           {{ ic }}
         </option>
@@ -63,9 +67,7 @@ export default {
       >
       <input
         type="number"
-        v-bind:class="
-          newIncome.isError ? 'form-control border-danger' : 'form-control'
-        "
+        v-bind:class="err && 'border-danger'"
         class="form-control"
         aria-label="Sizing example input"
         aria-describedby="inputGroup-sizing-default"
@@ -73,10 +75,9 @@ export default {
         v-on:input="newIncome.amount = +$event.target.value"
         ref="elInput"
       />
-
-      <div>
-        <p v-if="newIncome.isError" style="color: red">Insert correct number</p>
-      </div>
+    </div>
+    <div>
+      <p v-if="err" style="color: red">{{ err }}</p>
     </div>
     <button
       v-on:click="submitIncome"
